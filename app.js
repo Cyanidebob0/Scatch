@@ -6,6 +6,8 @@ const path = require("path");
 
 const usermodel = require("./models/user-model");
 const productmodel = require("./models/product-model");
+const ownermodel = require("./models/owner-model");
+const db = require("./config/mongoose-connection");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
