@@ -10,7 +10,7 @@ const db = require("./config/mongoose-connection");
 const usersRouter = require("./routes/usersRouters");
 const productsRouter = require("./routes/productsRouter");
 const ownersRouter = require("./routes/ownersRouter");
-const homeRouter = require("./models/index");
+const homeRouter = require("./routes/index");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
