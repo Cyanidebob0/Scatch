@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const dbgr = require("debug")("development:main");
 
 const cookie = require("cookie-parser");
 const path = require("path");
@@ -10,6 +11,7 @@ const db = require("./config/mongoose-connection");
 const usersRouter = require("./routes/usersRouters");
 const productsRouter = require("./routes/productsRouter");
 const ownersRouter = require("./routes/ownersRouter");
+const homeRouter = require("./models/index");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,7 +22,8 @@ app.set("view engine", "ejs");
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 app.use("/owners", ownersRouter);
+app.use("/", homeRouter);
 
 app.listen(3000, () => {
-  console.log("Server is running");
+  dbgr("Server is running");
 });
