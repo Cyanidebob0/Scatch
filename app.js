@@ -4,6 +4,8 @@ const app = express();
 const cookie = require("cookie-parser");
 const path = require("path");
 
+require("dotenv").config();
+
 const usermodel = require("./models/user-model");
 const productmodel = require("./models/product-model");
 const ownermodel = require("./models/owner-model");
