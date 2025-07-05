@@ -11,6 +11,8 @@ const usersRouter = require("./routes/usersRouters");
 const productsRouter = require("./routes/productsRouter");
 const ownersRouter = require("./routes/ownersRouter");
 const homeRouter = require("./routes/index");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
