@@ -9,7 +9,7 @@
   <body>
     <% if (error && error.length > 0) { %>
     <div
-      class="absolute top-5 left-1/2 -translate-x-1/2 z-50 bg-red-500 text-white p-2 rounded-xl shadow-lg"
+      class="absolute top-5 left-1/2 -translate-x-1/2 z-50 bg-red-500 text-white p-2 rounded-xl shadow-lg" id="flash-msg"
     >
       <span class="inline-block mt-1 mb-1 text-white"><%= error %></span>
     </div>
@@ -62,5 +62,12 @@
         class="h-full w-1/2 bg-[url(images/home-picture.jpg)] bg-cover bg-center -rounded-2xl"
       ></div>
     </div>
+      <script>
+      // auto-dismiss flash banner after 2 s
+      setTimeout(() => {
+        const flash = document.getElementById('flash-msg');
+        if (flash) flash.style.display = 'none';
+      }, 2000);
+    </script>
   </body>
 </html>
