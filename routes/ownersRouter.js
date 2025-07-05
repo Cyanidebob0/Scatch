@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "development") {
       password,
     });
 
-    res.status(201).send(createdOwner);
+    res.status(201).send("Owner created successfully");
   });
 }
 
