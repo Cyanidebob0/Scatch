@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     if (!user) return res.status(502).send("Username or password is incorrect");
     let ismatch = await bcrypt.compare(password, user.password);
     if (!ismatch) {
-      return res.status(500).send("User name or password is incorrect");
+      return res.status(500).send("Username or password is incorrect");
     }
     res.cookie("token", tokenGenerator(user));
     res.redirect("/mainpage");

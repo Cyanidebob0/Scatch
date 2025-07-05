@@ -7,7 +7,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  let error = req.flash("error");
+  res.render("login", { error });
 });
 
 router.get("/mainpage", isLoggedin, (req, res) => {

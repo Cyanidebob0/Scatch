@@ -7,6 +7,13 @@
     <title>Scatch - Login</title>
   </head>
   <body>
+    <% if (error && error.length > 0) { %>
+    <div
+      class="absolute top-5 left-1/2 -translate-x-1/2 z-50 bg-red-500 text-white p-2 rounded-xl shadow-lg"
+    >
+      <span class="inline-block mt-1 mb-1 text-white"><%= error %></span>
+    </div>
+    <% } %>
     <div class="h-screen w-full flex">
       <div class="h-full w-1/2 bg-[#F5F5F5] relative">
         <div class="h-20 p-6">
