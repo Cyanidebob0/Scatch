@@ -1,6 +1,5 @@
 const userModel = require("../models/user-model");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const tokenGenerator = require("../utils/tokenGenerator");
 
 module.exports = async (req, res) => {
@@ -20,7 +19,7 @@ module.exports = async (req, res) => {
       password: hashPass,
     });
     res.cookie("token", tokenGenerator(createdUser));
-    res.status(201).send(createdUser);
+    res.redirect("/mainpage");
   } catch (err) {
     res.status(500).send(err.message);
   }
