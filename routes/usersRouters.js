@@ -10,8 +10,6 @@ router.post("/login", loginuserController);
 
 router.get("/logout", logoutController);
 
-router.get("/", (req, res) => {
-  res.send("users");
-});
+
 
 module.exports = router;
