@@ -23,4 +23,8 @@ router.get("/mainpageowner", isLoggedin, isOwner, (req, res) => {
   res.render("mainpageowner");
 });
 
+router.get("/terms", (req, res) => {
+  res.render("terms");
+});
+
 module.exports = router;
