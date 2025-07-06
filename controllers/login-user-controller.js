@@ -28,7 +28,6 @@ module.exports = async (req, res) => {
       }
       owner.role = "owner";
       await owner.save();
-      console.log(owner);
       res.cookie("token", tokenGenerator(owner));
       res.redirect("/mainpageowner");
     } else {

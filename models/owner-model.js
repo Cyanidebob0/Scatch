@@ -8,8 +8,6 @@ const ownerSchema = mongoose.Schema({
   },
   email: String,
   password: String,
-  products: Array,
-  picture: String,
   gstin: String,
 });
 

@@ -8,10 +8,11 @@ const userschema = mongoose.Schema({
   },
   email: String,
   password: String,
-  cart: Array,
-  orders: Array,
+  cart: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'product'
+  }],
   contact: Number,
-  picture: String,
 });
 
 module.exports = mongoose.model("user", userschema);
