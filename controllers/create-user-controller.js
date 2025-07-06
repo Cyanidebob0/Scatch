@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
       password: hashPass,
     });
     res.cookie("token", tokenGenerator(createdUser));
-    res.redirect("/mainpage");
+    res.redirect("/mainpageuser");
   } catch (err) {
     res.status(500).send(err.message);
   }

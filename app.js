@@ -1,10 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const dbgr = require("debug")("development:main");
 
 const path = require("path");
 
-require("dotenv").config();
 
 const db = require("./config/mongoose-connection");
 const usersRouter = require("./routes/usersRouters");
