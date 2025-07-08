@@ -32,10 +32,20 @@
       <div class="w-1/5 bg-white shadow px-6 py-4">
         <h2 class="text-xl font-semibold mb-4">Sort By</h2>
         <ul class="space-y-3 text-gray-700 text-sm">
-          <li><button class="hover:underline">Price: Low to High</button></li>
-          <li><button class="hover:underline">Price: High to Low</button></li>
-          <li><button class="hover:underline">Newest First</button></li>
-          <li><button class="hover:underline">Rating</button></li>
+          <li>
+            <a
+              href="/sort?sort=price_asc"
+              class="hover:underline block <%= sort === 'price_asc' ? 'font-bold text-blue-600' : '' %>"
+              >Price: Low to High</a
+            >
+          </li>
+          <li>
+            <a
+              href="/sort?sort=price_desc"
+              class="hover:underline block <%= sort === 'price_desc' ? 'font-bold text-blue-600' : '' %>"
+              >Price: High to Low</a
+            >
+          </li>
         </ul>
       </div>
 
