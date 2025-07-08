@@ -6,6 +6,7 @@ const { isOwner } = require("../middlewares/roleChecker");
 const mainpageownercontroller = require("../controllers/main-page-owner-controller");
 const mainpageusercontroller = require("../controllers/main-page-user-controller");
 const sortcontroller = require("../controllers/sort-controller");
+const ownerModel = require("../models/owner-model");
 
 router.get("/", (req, res) => {
   res.render("signUp");
@@ -42,10 +43,15 @@ router.get("/cart", isLoggedin, (req, res) => {
 });
 
 router.get("/registerasowner", (req, res) => {
-  res.render("registerasowner", { 
+  res.render("registerasowner", {
     error: req.flash("error")[0],
-    success: req.flash("success")[0]
+    success: req.flash("success")[0],
   });
+});
+
+router.get("/ownerprofile", isLoggedin, isOwner, async (req, res) => {
+  const owner = await ownerModel.findById(req.owner.id);
+  res.render("ownerprofile", { owner });
 });
 
 module.exports = router;
