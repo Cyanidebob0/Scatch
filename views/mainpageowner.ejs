@@ -8,6 +8,11 @@
     <title>Main Page Owner</title>
   </head>
   <body class="bg-gray-50">
+    <% if (successMsg && successMsg.length > 0) { %>
+    <div class="bg-green-200 text-green-800 px-4 py-2 rounded mb-4 success-message">
+      <%= successMsg[0] %>
+    </div>
+    <% } %>
     <div
       class="w-full h-16 bg-white shadow flex items-center justify-between px-6"
     >
@@ -24,7 +29,7 @@
         </button>
         <a
           class="bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-sm"
-          href="/owners/logout"
+          href="owners/logout"
         >
           Logout
         </a>
@@ -55,18 +60,34 @@
               Image" class="w-full h-full object-cover">
             </div>
             <h3 class="text-lg font-medium"><%= product.name %></h3>
-            <p class="text-sm text-gray-600 mt-1"><%= product.price %></p>
+            <div class="flex gap-1">
+              <p class="text-sm text-gray-600 mt-1">Price:</p>
+              <p class="text-sm text-gray-600 mt-1 line-through">
+                <%=product.price%>
+              </p>
+              <p class="text-sm text-green-600 mt-1">
+                ₹ <%=Math.round(product.price -
+                product.discount*product.price/100)%>
+              </p>
+            </div>
             <div class="mt-3 flex gap-2">
-              <button
-                class="w-1/2 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg py-1 text-sm"
+              <a
+                href="/editproduct/<%=product._id%>"
+                class="w-1/2 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg py-1 text-sm text-center"
               >
                 Edit
-              </button>
-              <button
-                class="w-1/2 bg-red-400 hover:bg-red-500 text-white rounded-lg py-1 text-sm"
+              </a>
+              <form
+                action="products/deleteproduct/<%=product._id%>"
+                method="POST"
+                class="w-1/2"
               >
-                Delete
-              </button>
+                <button
+                  class="w-full bg-red-400 hover:bg-red-500 text-white rounded-lg py-1 text-sm text-center delete-button"
+                >
+                  Delete
+                </button>
+              </form>
             </div>
           </div>
           <% }) %> <% } else { %>
@@ -75,5 +96,10 @@
         </div>
       </div>
     </div>
+    <script>
+      setTimeout(() => {
+        document.querySelector(".success-message").style.display = "none";
+      }, 3000);
+    </script>
   </body>
 </html>

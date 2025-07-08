@@ -4,6 +4,7 @@ const isLoggedin = require("../middlewares/isLoggedIn");
 const loginuserController = require("../controllers/login-user-controller");
 const { isOwner } = require("../middlewares/roleChecker");
 const mainpageownercontroller = require("../controllers/main-page-owner-controller");
+const productModel = require("../models/product-model");
 
 router.get("/", (req, res) => {
   res.render("signUp");
@@ -22,12 +23,17 @@ router.get("/mainpageuser", isLoggedin, (req, res) => {
 
 router.get("/mainpageowner", isLoggedin, isOwner, mainpageownercontroller);
 
-router.get("/createproduct",isLoggedin, isOwner, (req, res) => {
+router.get("/createproduct", isLoggedin, isOwner, (req, res) => {
   res.render("createproduct");
 });
 
 router.get("/terms", (req, res) => {
   res.render("terms");
+});
+
+router.get("/editproduct/:id", isLoggedin, isOwner, async (req, res) => {
+  const product = await productModel.findById(req.params.id);
+  res.render("editproduct", { product });
 });
 
 module.exports = router;
