@@ -5,28 +5,32 @@ const logoutController = require("../controllers/logout-controller");
 const bcrypt = require("bcrypt");
 const tokenGenerator = require("../utils/tokenGenerator");
 
-if (process.env.NODE_ENV === "development") {
-  router.post("/create", async (req, res) => {
-    let owners = await ownerModel.find();
-    if (owners.length > 0) {
-      return res.status(500).send("Internal error cannot create a user");
+router.post("/create", async (req, res) => {
+  try {
+    const { fullname, email, password } = req.body;
+
+    let owner = await ownerModel.findOne({ email });
+    if (owner) {
+      req.flash("error", "An account with this email already exists");
+      return res.redirect("/registerasowner");
     }
-    try {
-      const { fullname, email, password } = req.body;
-      const salt = await bcrypt.genSalt(10);
-      const hashPass = await bcrypt.hash(password, salt);
-      let createdOwner = await ownerModel.create({
-        fullname,
-        email,
-        password: hashPass,
-      });
-      res.cookie("token", tokenGenerator(createdOwner));
-      res.status(201).send("Owner created successfully");
-    } catch (err) {
-      res.send(err.message);
-    }
-  });
-}
+
+    const salt = await bcrypt.genSalt(10);
+    const hashPass = await bcrypt.hash(password, salt);
+
+    const createdOwner = await ownerModel.create({
+      fullname,
+      email,
+      password: hashPass,
+    });
+
+    res.cookie("token", tokenGenerator(createdOwner));
+    req.flash("success", "Registration successful!");
+    res.redirect("/mainpageowner");
+  } catch (err) {
+    res.send(err.message);
+  }
+});
 
 router.get("/logout", logoutController);
 

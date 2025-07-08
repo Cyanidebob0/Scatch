@@ -37,4 +37,15 @@ router.get("/editproduct/:id", isLoggedin, isOwner, async (req, res) => {
 
 router.get("/sort", isLoggedin, sortcontroller);
 
+router.get("/cart", isLoggedin, (req, res) => {
+  res.render("cart");
+});
+
+router.get("/registerasowner", (req, res) => {
+  res.render("registerasowner", { 
+    error: req.flash("error")[0],
+    success: req.flash("success")[0]
+  });
+});
+
 module.exports = router;

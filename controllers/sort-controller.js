@@ -19,13 +19,19 @@ module.exports = async (req, res) => {
 
     const template = isOwnerRoute ? "mainpageowner" : "mainpageuser";
 
+    // Get flash messages
+    const successMsg = req.flash('success') || [];
+    const errorMsg = req.flash('error') || [];
+
     res.render(template, {
       products,
       sort: sort || "price_asc",
-      successMsg: req.flash("success") || [],
+      successMsg: successMsg[0],
+      errorMsg: errorMsg[0]
     });
   } catch (error) {
     console.error("Error sorting products:", error);
+    req.flash("error", "Error sorting products");
     const redirectPath =
       req.headers.referer && req.headers.referer.includes("user")
         ? "/mainpageuser"

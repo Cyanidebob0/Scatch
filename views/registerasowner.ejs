@@ -4,18 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Scatch</title>
+    <title>Scatch - Register Owner</title>
   </head>
   <body>
     <div class="h-screen w-full flex">
       <div class="h-full w-1/2 bg-[#F5F5F5] relative">
         <div class="h-20 p-6">
           <h1 class="text-4xl font-bold tracking-tighter">Scatch</h1>
+
           <div
             class="w-[25vw] rounded-xl top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2"
           >
-            <h1 class="text-4xl mb-16">Get Started Now</h1>
-            <form action="/users/create" method="POST">
+            <!-- Flash Messages -->
+            <% if (typeof error !== 'undefined' && error.length > 0) { %>
+              <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
+                <p><%= error %></p>
+              </div>
+            <% } %>
+            
+            <% if (typeof success !== 'undefined' && success.length > 0) { %>
+              <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+                <p><%= success %></p>
+              </div>
+            <% } %>
+
+            <h1 class="text-4xl mb-8">Register as Owner</h1>
+
+            <form action="/owners/create" method="POST" id="ownerRegisterForm">
               <h3 class="text-l mt-5">Name</h3>
               <input
                 class="w-full h-10 rounded-xl p-2 outline-none border border-gray-300"
@@ -24,6 +39,7 @@
                 name="fullname"
                 required
               />
+
               <h3 class="text-l mt-3">Email</h3>
               <input
                 class="w-full h-10 rounded-xl p-2 outline-none border border-gray-300"
@@ -32,6 +48,7 @@
                 name="email"
                 required
               />
+
               <h3 class="text-l mt-3">Password</h3>
               <input
                 class="w-full h-10 rounded-xl p-2 outline-none border border-gray-300"
@@ -40,8 +57,9 @@
                 name="password"
                 required
               />
+
               <div class="flex mt-3 gap-2">
-                <input type="checkbox" id="checkbox" />
+                <input type="checkbox" id="checkbox" required />
                 <label class="text-sm" for="checkbox">
                   I agree to the
                   <span class="hover:underline cursor-pointer">
@@ -49,37 +67,28 @@
                   </span>
                 </label>
               </div>
-              <button class="w-full h-10 rounded-xl p-2 bg-green-400 mt-10">
-                Sign Up
+
+              <button
+                class="w-full h-10 rounded-xl p-2 bg-green-400 mt-10 hover:bg-green-500 transition"
+              >
+                Register Owner
               </button>
             </form>
 
-            <!-- Existing Login Link -->
             <p class="mt-5 text-center">
-              Already have an account?
+              Already have an owner account?
               <span>
                 <a class="hover:text-blue-700 cursor-pointer" href="/login">
                   Login
                 </a>
               </span>
             </p>
-
-            <p class="mt-2 text-center">
-              Want to register as an owner?
-              <span>
-                <a
-                  class="hover:text-blue-700 cursor-pointer"
-                  href="/registerasowner"
-                >
-                  Register as Owner
-                </a>
-              </span>
-            </p>
           </div>
         </div>
       </div>
+
       <div
-        class="h-full w-1/2 bg-[url(images/home-picture.jpg)] bg-cover bg-center -rounded-2xl"
+        class="h-full w-1/2 bg-[url(images/owner.jpg)] bg-cover bg-center"
       ></div>
     </div>
   </body>
