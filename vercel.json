@@ -18,6 +18,14 @@
     {
       "src": "/(.*)",
       "dest": "/api/index.js"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/public/favicon.ico"
+    },
+    {
+      "src": "/(.*\\.(?:png|jpg|jpeg|gif|ico|svg|css|js))",
+      "dest": "/public/$1"
     }
   ]
 }
