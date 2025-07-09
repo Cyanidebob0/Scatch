@@ -22,7 +22,18 @@ const sessionConfig = require("../config/session");
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../../public")));
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, "../../public"), {
+  setHeaders: (res, path) => {
+    // Set proper cache headers for static files
+    if (path.endsWith('.ico')) {
+      res.setHeader('Content-Type', 'image/x-icon');
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    }
+  }
+}));
+
 app.set("view engine", "ejs");
 app.use(cookieParser());
 
@@ -38,11 +49,15 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-app.use("/users", usersRouter);
-app.use("/products", productsRouter);
-app.use("/owners", ownersRouter);
-app.use("/", homeRouter);
+// API Routes
+app.use("/api/users", usersRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/owners", ownersRouter);
+
+// Serve index.html for the root route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
