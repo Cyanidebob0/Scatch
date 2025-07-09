@@ -31,7 +31,7 @@ app.use(flash());
 
 // Database connection middleware
 app.use((req, res, next) => {
-  if (db.mongoose.connection.readyState !== 1) {
+  if (mongoose.connection.readyState !== 1) {
     return res.status(503).send('Database connection not established');
   }
   next();
