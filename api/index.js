@@ -5,9 +5,10 @@ const app = express();
 const path = require("path");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
+const mongoose = require('mongoose');
 
-// Import database connection
-const db = require("../config/mongoose-connection");
+// Initialize database connection
+require("../config/mongoose-connection");
 
 // Import routes
 const usersRouter = require("./routes/usersRouters");
