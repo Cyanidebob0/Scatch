@@ -5,14 +5,14 @@ const dbgr = require("debug")("development:main");
 
 const path = require("path");
 
-const db = require("./config/mongoose-connection");
+const db = require("../config/mongoose-connection");
 const usersRouter = require("./routes/usersRouters");
 const productsRouter = require("./routes/productsRouter");
 const ownersRouter = require("./routes/ownersRouter");
 const homeRouter = require("./routes/index");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
-const sessionConfig = require("./config/session");
+const sessionConfig = require("../config/session");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
